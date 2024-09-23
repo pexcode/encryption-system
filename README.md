@@ -9,6 +9,7 @@ This system allows you to encrypt sensitive data such as payment transactions an
 ## Usage
 
 ### useing request encrypt
+```bash
 curl -X POST http://127.0.0.1:5000/encrypt \
 -H "Content-Type: application/json" \
 -d '{"transaction_id": "12345", "amount": 100.0, "currency": "USD", "merchant": "Merchant X"}'
@@ -16,7 +17,7 @@ curl -X POST http://127.0.0.1:5000/encrypt \
 
 
 ### useing request decrypt
-
+```bash
 curl -X POST http://127.0.0.1:5000/decrypt \
 -H "Content-Type: application/json" \
 -d '{"encrypted_aes_key": "ENCRYPTED_KEY", "nonce": "NONCE", "ciphertext": "CIPHERTEXT", "tag": "TAG", "signature": "SIGNATURE"}'
