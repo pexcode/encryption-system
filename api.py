@@ -11,8 +11,8 @@ hmac_signature = HMACSignature(aes_cipher.key)
 
 @app.route('/encrypt', methods=['POST'])
 def encrypt():
-    data = request.json  # استلام كائن JSON
-    json_data = json.dumps(data)  # تحويل الكائن إلى نص JSON
+    data = request.json  #  JSON data
+    json_data = json.dumps(data)  # convert JSON
     nonce, ciphertext, tag = aes_cipher.encrypt(json_data)
     encrypted_aes_key = rsa_encryption.encrypt_key(aes_cipher.key)
     signature = hmac_signature.sign_message(json_data)
@@ -35,7 +35,7 @@ def decrypt():
     decrypted_json = aes_cipher.decrypt(nonce, ciphertext, tag)
     signature_valid = hmac_signature.verify_signature(decrypted_json, encrypted_data['signature'])
     return jsonify({
-        'decrypted_data': json.loads(decrypted_json),  # تحويل نص JSON إلى كائن
+        'decrypted_data': json.loads(decrypted_json),  #  convert   JSON    
         'signature_valid': signature_valid
     })
 
